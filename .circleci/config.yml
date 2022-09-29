@@ -53,20 +53,22 @@ jobs:
   # deploy step will run only after manual approval
   deploy:
     docker:
+      # the base image can run most needed actions with orbs
       - image: "cimg/base:stable"
-      # more setup needed for aws, node, elastic beanstalk
     steps:
+      # install node and checkout code
       - node/install:
-          node-version: '14.15' 
-      - eb/setup
-      - aws-cli/setup
+          node-version: '14.15'         
       - checkout
+      - aws-cli/setup
       - run:
-          name: Deploy App
-          # TODO: Install, build, deploy in both apps
+          name: Deploy frontend
           command: |
-            echo "# TODO: Install, build, deploy in both apps"
-            npm run deploy
+            npm run frontend:deploy
+      - run:
+          name: Deploy Backend
+          command: |
+            npm run api:deploy
             
 workflows:
   udagram:
