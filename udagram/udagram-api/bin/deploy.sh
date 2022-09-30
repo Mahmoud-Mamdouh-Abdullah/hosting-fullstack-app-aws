@@ -1,6 +1,6 @@
 # Deploy to AWS EB
 # cd ./www
-eb init udagram-api --region us-east-1 --platform node.js
+eb init devtest10 --region us-east-1 --platform node.js
 eb list
-eb use udagram-api-dev
+eb use Devtest10-env
 eb deploy
